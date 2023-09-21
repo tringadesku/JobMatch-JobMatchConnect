@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProfileMatching.Controllers;
 
@@ -11,9 +12,10 @@ using ProfileMatching.Controllers;
 namespace ProfileMatching.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230921055739_teams")]
+    partial class teams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -603,32 +605,6 @@ namespace ProfileMatching.Migrations
                     b.ToTable("JobPosts");
                 });
 
-            modelBuilder.Entity("ProfileMatching.Models.Player", b =>
-                {
-                    b.Property<int>("PlayerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"), 1L, 1);
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PlayerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TeamId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.HasKey("PlayerId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("Players");
-                });
-
             modelBuilder.Entity("ProfileMatching.Models.Project", b =>
                 {
                     b.Property<int>("ProjectId")
@@ -1001,17 +977,6 @@ namespace ProfileMatching.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ProfileMatching.Models.Player", b =>
-                {
-                    b.HasOne("ProfileMatching.Models.Author", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("ProfileMatching.Models.Project", b =>
