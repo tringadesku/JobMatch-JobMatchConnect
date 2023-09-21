@@ -29,6 +29,11 @@ namespace ProfileMatching.Controllers
         public DbSet<Activity> Activities { get; set; }
         public DbSet<RecentLogin> RecentLogins { get; set; }
         public DbSet<UserCredentials> UserCredentials { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Player> Players { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)
